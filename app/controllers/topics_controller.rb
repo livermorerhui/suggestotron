@@ -4,7 +4,7 @@ class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.json
   def index
-    @topics = Topic.all
+    @topics=Topic.all.sort_by{|topic| topic.votes.count}.reverse
   end
 
   # GET /topics/1
@@ -69,7 +69,7 @@ class TopicsController < ApplicationController
   def downvote
     @count = @topic.votes.count
     if @count != 0
-      @topic.votes.delete(@topic.votes.first)
+      @topic.votes.first.delete
     end
     redirect_to(topics_path)
   end
