@@ -67,8 +67,7 @@ class TopicsController < ApplicationController
   end
 
   def downvote
-    @count = @topic.votes.count
-    if @count != 0
+    if @topic.votes.count != 0
       @topic.votes.first.delete
     end
     redirect_to(topics_path)
